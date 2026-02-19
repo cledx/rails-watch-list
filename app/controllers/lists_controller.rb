@@ -8,6 +8,8 @@ class ListsController < ApplicationController
 
   def show
     @bookmarks = @list.bookmarks.all
+    @newbookmark = Bookmark.new
+    @movies = Movie.order(title: :asc)
   end
 
   def new
@@ -16,8 +18,11 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
-    @list.save
-    redirect_to list_path(@list)
+     if @list.save
+      redirect_to list_path(@list)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy

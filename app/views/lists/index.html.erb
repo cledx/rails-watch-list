@@ -1,14 +1,45 @@
-<div class="container"><div class="navbar justify-content-between align-items-center">
-    <h1>Movie Lists</h1>
-    <%= link_to 'New List', new_list_path, class: "btn btn-primary" %>
-</div>
+<% randImg = ["https://picsum.photos/seed/alpha/600/400",
+  "https://picsum.photos/seed/bravo/600/400",
+  "https://picsum.photos/seed/charlie/600/400",
+  "https://picsum.photos/seed/delta/600/400",
+  "https://picsum.photos/seed/echo/600/400",
+  "https://picsum.photos/seed/foxtrot/600/400",
+  "https://picsum.photos/seed/golf/600/400",
+  "https://picsum.photos/seed/hotel/600/400",
+  "https://picsum.photos/seed/india/600/400",
+  "https://picsum.photos/seed/juliet/600/400",
+  "https://picsum.photos/seed/kilo/600/400",
+  "https://picsum.photos/seed/lima/600/400",
+  "https://picsum.photos/seed/mike/600/400",
+  "https://picsum.photos/seed/november/600/400",
+  "https://picsum.photos/seed/oscar/600/400",
+  "https://picsum.photos/seed/papa/600/400",
+  "https://picsum.photos/seed/quebec/600/400",
+  "https://picsum.photos/seed/romeo/600/400",
+  "https://picsum.photos/seed/sierra/600/400",
+  "https://picsum.photos/seed/tango/600/400",
+  "https://picsum.photos/seed/uniform/600/400",
+  "https://picsum.photos/seed/victor/600/400",
+  "https://picsum.photos/seed/whiskey/600/400",
+  "https://picsum.photos/seed/xray/600/400",
+  "https://picsum.photos/seed/yankee/600/400",
+  "https://picsum.photos/seed/zulu/600/400"] %>
 
-<% @lists.each do |list| %>
-<ul>
-    <li>
-        <%= link_to list.name, list_path(list) %>
-    </li>
-</ul>
-<% end %>
 
+<div class="banner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.39),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZW1wdHklMjB0aGVhdGVyfGVufDB8fDB8fHww);">
+    <div class="container">
+        <h1>The Movie Shelf</h1>
+        <p>Your place to keep tabs on your favourite films</p>
+        <%= link_to 'New List', new_list_path, class: "btn btn-flat" %>
+    </div>
 </div>
+<div class="container my-4">
+    <div class="cards">
+        <% @lists.each do |list| %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= randImg.sample %>)">
+            <%= link_to list.name, list_path(list), class: 'text-white text-decoration-none' %>
+        </div>
+        <% end %>
+    </div>
+</div>
+ 
