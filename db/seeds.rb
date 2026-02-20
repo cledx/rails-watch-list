@@ -1,8 +1,12 @@
 
 require 'open-uri'
+require "stringio"
+
 puts "Cleaning the DB...."
-Movie.destroy_all
+Bookmark.destroy_all
 List.destroy_all
+Movie.destroy_all
+
 
 # the Le Wagon copy of the API
 puts "Creating movies.... \n"
@@ -28,8 +32,7 @@ puts "^v" * 30
 
 puts "Creating lists...\n"
 
-MOVIE_COMMENTS = [
-  "Absolutely loved it from start to finish.",
+MOVIE_COMMENTS = ["Absolutely loved it from start to finish.",
   "The visuals were stunning but the story felt thin.",
   "One of the best movies I’ve seen this year.",
   "Way too long for what it was trying to say.",
@@ -148,14 +151,16 @@ MOVIE_COMMENTS = [
   "Wouldn’t watch again.",
   "Really memorable scenes.",
   "Too much filler.",
-  "Strong story and acting."
-]
+  "Strong story and acting."]
+
+
 movies = Movie.all
 ["Greatest Movies", "Mom's Faves", "Worst Movies Ever", "Doug's Secret Gems", "Try to Find the Connection"].each do |list_name| 
   puts "Making #{list_name} list..."
-  list = List.create!(name: list_name)
+  list = List.new(name: list_name)
+  list.save
   rand(3..7).times do
-    rand_movie = movies[rand(0..movies.count)]
+    rand_movie = movies.sample
     puts "    Bookmarking #{rand_movie.title}..."
     rand_comment = MOVIE_COMMENTS.sample
     puts "      with comment: #{rand_comment}"
