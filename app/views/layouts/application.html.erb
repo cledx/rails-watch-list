@@ -24,6 +24,48 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black font-color-white px-4">
+       <div class="white-icon"><i class="fa-solid fa-clapperboard"></i></div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="dropdown" data-bs-target="#navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <%= link_to 'Home', lists_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item dropdown">
+            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+              Lists
+            </button>
+            <ul class="dropdown-menu">
+            <% List.all.each do |list| %>
+                <li><%= link_to list.name, list_path(list), class:"dropdown-item" %></li>
+            <% end %>
+            </ul>
+          </li>
+        </ul>
+        <%= simple_form_for :search, url: search_path, method: :get, html: { class: "d-flex" } do |f| %>
+          <%= f.input :query,
+              label: false,
+              input_html: {
+                class: "form-control me-2",
+                placeholder: "Search..."
+              } %>
+
+          <%= f.input :category,
+              collection: [["Lists", "list"], ["Movies", "movie"]],
+              include_blank: false,
+              label: false,
+              input_html: { class: "form-select me-2" } %>
+
+          <%= f.button :submit, "Search", class: "btn btn-outline-success" %>
+
+         <% end %>
+      </div>
+    </nav>
+
+    
     <%= yield %>
   </body>
 </html>

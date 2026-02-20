@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "lists#index"
+  get "search", to: "lists#search", as: :search
 
   resources :lists do
     resources :bookmarks, only: [:new, :create]

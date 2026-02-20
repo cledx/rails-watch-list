@@ -30,6 +30,10 @@ class ListsController < ApplicationController
     redirect_to lists_path, status: :see_other
   end
 
+  def search
+
+  end
+
   private
 
   def list_params

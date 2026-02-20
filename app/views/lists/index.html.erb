@@ -36,7 +36,15 @@
 <div class="container my-4">
     <div class="cards">
         <% @lists.each do |list| %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : randImg.sample %>)">
+        <% photo = "" %>
+        <%  if list.photo.attached? 
+                photo = cl_image_path(list.photo.key) 
+            elsif list.movies.first
+                photo = list.movies.first.poster_url
+            else
+                photo = randImg.sample
+            end %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= photo %>)">
             <%= link_to list.name, list_path(list), class: 'text-white text-decoration-none' %>
         </div>
         <% end %>

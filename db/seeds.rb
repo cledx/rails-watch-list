@@ -10,7 +10,7 @@ Movie.destroy_all
 
 # the Le Wagon copy of the API
 puts "Creating movies.... \n"
-(1..5).to_a.each do |num|
+(1..20).to_a.each do |num|
   url = "http://tmdb.lewagon.com/movie/top_rated?page=#{num}"
   response = JSON.parse(URI.open(url).read)
   
